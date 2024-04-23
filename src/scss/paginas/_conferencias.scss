@@ -1,0 +1,108 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+.agenda {
+    padding: 5rem 0;
+    @include m.contenedor;
+}
+
+.eventos {
+    $modificador: &;
+
+    &__heading {
+        color: v.$azul;
+        margin: 5rem 0;
+        text-align: left;
+        font-size: clamp(2rem, -0.8rem + 8vw, 6rem);
+    }
+
+    &__fecha {
+        color: v.$gris;
+        margin: 3rem 0 1rem 0;
+    }
+
+    &--workshops {
+        #{$modificador}__heading {
+            color: v.$secundario;
+        }
+
+        .evento__informacion {
+            background-color: v.$secundario;
+            &:hover {
+                background-color: darken(v.$secundario, 10%);
+            }
+        }
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: rgba(v.$blanco, .5);
+    }
+}
+
+.evento {
+    &__hora {
+        font-weight: v.$bold;
+    }
+
+    &__informacion {
+        padding: 2rem;
+        border-radius: 1rem;
+        background-color: v.$azul;
+        color: v.$blanco;
+        transition: 300ms background-color ease;
+
+        &:hover {
+            background-color: darken(v.$azul, 10%);
+        }
+    }
+
+    &__nombre {
+        font-size: 2rem;
+        margin: 0;
+        display: -webkit-box; 
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        &:hover {
+            display: unset;
+        }
+    }
+
+    &__introduccion {
+        font-size: 1.6rem;
+        //Con lo siguiente hago que se oculte el texto
+        display: -webkit-box; //Creo la caja virtual
+        -webkit-line-clamp: 2; //Le pongo que solo quiero que se vean 2 lineas
+        -webkit-box-orient: vertical; //En orientacion vertical
+        overflow: hidden; //Oculto el texto que sobra de la linea y automaticamente le coloca 3 puntos al final del texto
+        /////////////////////////////////
+    }
+
+    &__autor-info {
+        display: flex;
+        gap: 2rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__imagen-autor {
+        width: 5rem;
+        background-color: v.$blanco;
+        border-radius: 50%;
+    }
+
+    &__autor-nombre {
+        font-weight: v.$bold;
+    }
+
+    &__agregar {
+        @include m.boton(v.$blanco, v.$negro);
+        margin-top: 1rem;
+
+        &:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+    }
+}
